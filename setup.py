@@ -1,8 +1,11 @@
-# Compiled python modules.
-*.pyc
+from setuptools import setup
 
-# Setuptools distribution folder.
-/dist/
-
-# Python egg metadata, regenerated from source files by setuptools.
-/*.egg-info
+setup(name='pyfunctionbases',
+      version='0.2',
+      description='A Python module to compute multidimensional Arrays of evaluated functions.',
+      url='https://github.com/NiMlr/PyFunctionBases',
+      author='Nils Mueller',
+      author_email='nils.mueller@ini.rub.de',
+      license='MIT',
+      packages=['pyfunctionbases'],
+      zip_safe=False)
