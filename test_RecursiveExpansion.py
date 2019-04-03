@@ -2,10 +2,12 @@
 ToDo:
   - tests
 '''
-from mdp.nodes import PolynomialExpansionNode
-from RecusiveExpansionNodeNils import *
-from mdp.test._tools import *
+from funcbase import *
 import numpy as np
+from numpy.testing import assert_array_almost_equal
+import time
+
+DECIMAL = 7
 
 
 def get_tschebyschow_poly(x):
@@ -85,10 +87,10 @@ def test_RecursiveExpansionNode1():
         name = functup[2]
         data = np.random.rand(1, 1)
 
-        expn = RecursiveExpansionNodeNils(degree, recf=name, transform=False)
+        expn = RecursiveExpansion(degree, recf=name, transform=False)
         nodeexp = expn.execute(data)
         assert_array_almost_equal(nodeexp,
-                                  func(data[:, 0]), decimal-3)
+                                  func(data[:, 0]), DECIMAL-3)
         print('Single dim '+name + ' equal')
 
 
@@ -99,43 +101,30 @@ def test_RecursiveExpansionNode2():
         func = functup[0]
         degree = functup[1]
         name = functup[2]
-        recexpn = RecursiveExpansionNodeNils(degree, recf=name,
-                                             transform=False)
+        recexpn = RecursiveExpansion(degree, recf=name,
+                                     transform=False)
         resrec = recexpn.execute(data)
 
         reshand = np.array([get_handcomputed_function_tensor(data[i, :], func, degree)
                             for i in range(data.shape[0])])
 
-        assert_array_almost_equal(resrec, reshand, decimal-3)
+        assert_array_almost_equal(resrec, reshand, DECIMAL-3)
         print('Multi dim ' + name + ' equal')
 
 
 def test_Runtime():
     data = np.random.rand(100, 2)
     degree = 120
-    steffannode = LegendrePolyExpansionNode2(degree)
-    nilsnode = RecursiveExpansionNodeNils(degree, recf='legendre_poly',
-                                          transform=False)
+    REnode = RecursiveExpansion(degree, recf='legendre_poly',
+                                transform=False)
 
-    start = time.time()
-    nilsshape = nilsnode.execute(data).shape
-    nilstime = time.time()-start
+    REstart = time.time()
+    REshape = REnode.execute(data).shape
+    REtime = time.time()-REstart
 
-    start = time.time()
-    stefanshape = steffannode.execute(data).shape
-    stefantime = time.time()-start
-
-    start = time.time()
-    L = Legendre(data, degree)
-    orthnetshape = L.tensor.shape
-    orthnettime = time.time()-start
-
-    print('Nils\' took: % f for % d polynomials' %
-          (nilstime, (degree+1)**data.shape[1]))
-    print('Stefans took: %f for %d polynomials' % (stefantime, stefanshape[1]))
-    print('Orthnet took: %f for %d polynomials' %
-          (orthnettime, orthnetshape[1]))
-    print('Shapes: ', nilsshape, stefanshape, orthnetshape)
+    print('N\' took: % f for % d polynomials' %
+          (REtime, (degree+1)**data.shape[1]))
+    print('Shapes: ', REshape)
 
 
 if __name__ == "__main__":

@@ -69,16 +69,15 @@ recfs = {'standard_poly': (2, 2, 1, init_standard_poly, recf_standard_poly,
                                recf_tschebyschow_poly, -1, 1)}
 
 
-class RecursiveExpansionNodeNils(object):
+class RecursiveExpansion(object):
     """Recursively computable (orthogonal) expansions."""
 
     def __init__(self, degree, recf='standard_poly', transform=True,
                  input_dim=None, dtype=None):
         """Initialize a RecursiveExpansionNode."""
-        super(RecursiveExpansionNodeNils, self).__init__(degree,
-                                                         input_dim, dtype)
-        self.transform = transform
 
+        self.transform = transform
+        self.degree = degree
         # if in dictionary
         if recf in recfs:
             # where the recursion starts
@@ -108,14 +107,14 @@ class RecursiveExpansionNodeNils(object):
     def expanded_dim(self, num_vars):
         """Return the size of a vector of dimension 'dim' after
         an expansion of degree 'self._degree'."""
-        return (self._degree+1)**num_vars
+        return (self.degree+1)**num_vars
 
-    def _execute(self, x):
+    def execute(self, x):
         """Expansion of the data."""
         if self.transform:
             self._transform_orthogonal_interval(x)
 
-        deg = self._degree
+        deg = self.degree
         num_vars = x.shape[1]
         num_samples = x.shape[0]
         # preset memory
