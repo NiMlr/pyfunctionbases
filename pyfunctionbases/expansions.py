@@ -9,74 +9,16 @@ ToDo:
   - implement more recursions
 """
 import numpy as np
-
-
-def recf_standard_poly(basetensor, ind, x):
-    "Implementation of the recursion formula for standard polynomials."
-    return basetensor[ind.all+ind.getPreceding(1)] * \
-        basetensor[ind.all+ind.getFirst()]
-
-
-def init_standard_poly(basetensor, ind, x):
-    "Initialize the 1 and x1,...,xn before starting the recursion."
-    ind.zeroAllBut(0, 0)
-    basetensor[ind.all+ind.getCurrent()] = 1.
-    for i in range(x.shape[1]):
-        ind.zeroAllBut(i, 1)
-        basetensor[ind.all + ind.getCurrent()] = x[:, i]
-
-
-def recf_legendre_poly(basetensor, ind, x):
-    "Implementation of the recursion formula for Legendre polynomials."
-    n = ind.getN()
-    return (2.*n-1.)/n*basetensor[ind.all+ind.getFirst()] \
-        * basetensor[ind.all + ind.getPreceding(1)] \
-        - (n-1.)/n*basetensor[ind.all + ind.getPreceding(2)]
-
-
-def init_legendre_rational(basetensor, ind, x):
-    "Initialize the 1 and x1,...,xn before starting the recursion."
-    ind.zeroAllBut(0, 0)
-    basetensor[ind.all+ind.getCurrent()] = 1.
-    for i in range(x.shape[1]):
-        ind.zeroAllBut(i, 1)
-        basetensor[ind.all + ind.getCurrent()] = (x[:, i]-1.)/(x[:, i]+1.)
-
-
-def recf_legendre_rational(basetensor, ind, x):
-    "Implementation of the recursion formula for Legendre polynomials."
-    n = ind.getN()
-    xv = x[:, ind.current_var]
-    Rnmin1 = basetensor[ind.all+ind.getPreceding(1)]
-    Rnmin2 = basetensor[ind.all+ind.getPreceding(2)]
-    return (2.*n-1.)/n*(xv-1.) / (xv+1.) * Rnmin1 - (n-1.) / n * Rnmin2
-
-
-def recf_tschebyschow_poly(basetensor, ind, x):
-    "Implementation of the recursion formula for Tschebyschow polynomials."
-
-    return 2. * x[:, ind.current_var] * basetensor[ind.all+ind.getPreceding(1)] \
-        - basetensor[ind.all+ind.getPreceding(2)]
-
-
-recfs = {'standard_poly': (2, 2, 1, init_standard_poly, recf_standard_poly,
-                           -float('Inf'), float('Inf')),
-         'legendre_poly': (2, 3, 1, init_standard_poly, recf_legendre_poly,
-                           -1, 1),
-         'legendre_rational': (2, 3, 0, init_legendre_rational,
-                               recf_legendre_rational, 0, float('Inf')),
-         'tschebyschow_poly': (2, 3, 1, init_standard_poly,
-                               recf_tschebyschow_poly, -1, 1)}
+from .function_definitions import recfs
 
 
 class RecursiveExpansion(object):
     """Recursively computable (orthogonal) expansions."""
 
-    def __init__(self, degree, recf='standard_poly', transform=True,
-                 input_dim=None, dtype=None):
+    def __init__(self, degree, recf='standard_poly', input_dim=None,
+                 dtype=None):
         """Initialize a RecursiveExpansionNode."""
 
-        self.transform = transform
         self.degree = degree
         # if in dictionary
         if recf in recfs:
@@ -92,8 +34,8 @@ class RecursiveExpansion(object):
             # the recursion function
             self.recf = recfs[recf][4]
             # interval on which data must be
-            self.upper = recfs[recf][5]
-            self.lower = recfs[recf][6]
+            self.upper = recfs[recf][6]
+            self.lower = recfs[recf][5]
         # if supplied by user
         else:
             self.rec_start = recf[0]
@@ -101,19 +43,18 @@ class RecursiveExpansion(object):
             self.first = recf[2]
             self.r_init = recf[3]
             self.recf = recf[4]
-            self.upper = recf[5]
-            self.lower = recf[6]
+            self.upper = recf[6]
+            self.lower = recf[5]
 
     def expanded_dim(self, num_vars):
         """Return the size of a vector of dimension 'dim' after
         an expansion of degree 'self._degree'."""
         return (self.degree+1)**num_vars
 
-    def execute(self, x):
+    def execute(self, x, check=False):
         """Expansion of the data."""
-        if self.transform:
-            self._transform_orthogonal_interval(x)
-
+        if check:
+            self.check_domain(x)
         deg = self.degree
         num_vars = x.shape[1]
         num_samples = x.shape[0]
@@ -141,66 +82,23 @@ class RecursiveExpansion(object):
                   out=basetensor, optimize='optimal')
         return basetensor
 
-    def _transform_orthogonal_interval(self, x):
-        """Transform the data onto the cube on which the
-        the functions are orthogonal.
+    def check_domain(self, x, prec=1e-6):
+        """Checks for compliance of the data x with the domain on which
+            the function sequence selected is defined or orthogonal.
+        :param x: The data to be expanded. Observations/samples must
+            be along the first axis, variables along the second.
+        :type x: numpy.ndarray
+        :param prec: (Numerical) tolerance when checking validity.
+        :type prec: float
+        :raise mdp.NodeException: If one or more values lie outside of the function
+            specific domain.
+        """
+        xmax = np.amax(x)-prec
+        xmin = np.amin(x)+prec
 
-        If the cube is infinite the data is translated by the shortest
-        length vector possible.
-
-        If the cube is finite the data is scaled around the mean if neccessary.
-        Then the datamean is moved onto the cube mean by a translation."""
-        if self.lower is None or self.upper is None:
-            def f(y): return y
-            self.interval_transformation = f
-
-        if self.lower == -float('Inf') and self.upper == float('Inf'):
-            def f(y): return y
-            self.interval_transformation = f
-        elif self.lower == -float('Inf'):
-            self.diff = np.amax(x, axis=0)-self.upper
-            self.diff = self.diff.clip(min=0)
-            x -= self.diff
-
-            def f(y):
-                y -= self.diff
-                return y
-            self.interval_transformation = f
-        elif self.upper == float('Inf'):
-            self.diff = np.amin(x, axis=0)-self.lower
-            self.diff = self.diff.clip(max=0)
-            x -= self.diff
-
-            def f(y):
-                y -= self.diff
-                return y
-            self.interval_transformation = f
-        else:
-            mean = self.lower+(self.upper-self.lower)/2.0
-            dev = (self.upper-self.lower)/2
-
-            datamean = np.mean(x, 0)
-            x -= datamean
-            datamaxdev = np.amax(np.abs(x))
-
-            def f(y):
-                y -= datamean
-                y += mean
-                return y
-
-            if np.abs(datamaxdev) > 0:
-                if dev/datamaxdev < 1:
-                    x *= dev/datamaxdev
-
-                    def f(y):
-                        y -= datamean
-                        y *= dev/datamaxdev
-                        y += mean
-                        return y
-
-            x += mean
-
-            self.interval_transformation = f
+        if (self.upper < xmax) or (self.lower > xmin):
+            raise Exception(
+                "One or more values lie outside of the function specific domain.")
 
 
 class BasisTensorIndicator(object):
@@ -210,6 +108,10 @@ class BasisTensorIndicator(object):
 
     def __init__(self, num_vars, reach, first=1):
         # create index array of the last elements
+        if num_vars + 1 > len(self.letters):
+            raise Exception("Too many variable in order to use the einstein\
+                            notation(requires letters).")
+
         self.indices = np.zeros((reach+1, num_vars), dtype=int)
         self.num_vars = num_vars
         # how many last elements are to consider

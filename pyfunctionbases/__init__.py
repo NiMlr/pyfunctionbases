@@ -1,2 +1,2 @@
 
-from .expansions import .
+from .expansions import *
