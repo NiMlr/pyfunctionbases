@@ -2,6 +2,12 @@
 ToDo:
   - tests
 '''
+
+import sys
+import os
+sys.path.insert(0, os.path.abspath(
+    os.path.join(os.path.dirname(__file__), '..')))
+
 from pyfunctionbases.expansions import *
 import numpy as np
 from numpy.testing import assert_array_almost_equal
