@@ -1,9 +1,7 @@
 import os.path
 from setuptools import setup
 
-here = os.path.dirname(__file__)
-readme_path = os.path.join(here, 'README.md')
-readme = open(readme_path, 'rb').read().decode('utf-8')
+long_description = open('./README.md').read()
 
 setup(name='pyfunctionbases',
       use_scm_version={
@@ -11,7 +9,7 @@ setup(name='pyfunctionbases',
           'local_scheme': 'dirty-tag'
       },
       description='A Python module to compute multidimensional arrays of evaluated functions.',
-      long_description=readme,
+      long_description=long_description,
       url='https://github.com/NiMlr/PyFunctionBases',
       author='Nils Mueller',
       author_email='nils.mueller@ini.rub.de',
