@@ -4,10 +4,7 @@ from setuptools import setup
 long_description = open('./README.md').read()
 
 setup(name='pyfunctionbases',
-      use_scm_version={
-          'version_scheme': 'post-release',
-          'local_scheme': 'dirty-tag'
-      },
+      version=0.1,
       description='A Python module to compute multidimensional arrays of evaluated functions.',
       long_description=long_description,
       url='https://github.com/NiMlr/PyFunctionBases',
