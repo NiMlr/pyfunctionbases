@@ -30,10 +30,14 @@ is the cardinality of the one-dimensional bases omitting a constant function. Cu
 
 Please make sure that your data lies in these domains, checks will be run if desired.
 
+### Contents
 [1. Installation](#installation)  
 [2. Simple Usage](#simple-usage)  
 
+
 ## Installation 
+Requirements: `pip3 install numpy`
+
 ```bash
 pip3 install pyfunctionbases
 ```
