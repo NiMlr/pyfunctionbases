@@ -24,11 +24,12 @@ is the cardinality of the one-dimensional bases omitting a constant function. Cu
 [1. Installation](#installation)  
 [2. Simple Usage](#simple-usage)  
 
-## Installation: 
-```pip3 install pyfunctionbases```
+## Installation 
+```pip3 install pyfunctionbases
+```
 
 
-## Simple Usage:
+## Simple Usage
 ```python
 from pyfunctionbases import RecursiveExpansion
 import numpy as np
