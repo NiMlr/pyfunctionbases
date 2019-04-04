@@ -8,13 +8,13 @@ Specifically, the module evaluates basis functions on intervals by employing a r
 
 This is generalized to the multi-dimensional case by using a tensor product
 <p align="center">
-<img src="https://latex.codecogs.com/gif.latex?(x,y)&space;\mapsto&space;f_i(x)f_j(y)" title="(x,y) \mapsto f_i(x)f_j(y)" />
+<img src="https://latex.codecogs.com/gif.latex?(x,y)&space;\mapsto&space;f_i(x)f_j(y)" />
 </p>
 
 repeatedly on coordinate wise one-dimensional function bases. The code is vectorized over the evalution points
 
 <p align="center">
-<img src="https://latex.codecogs.com/gif.latex?x_i&space;\in&space;\mathbb{R}^{num\_dim},&space;i\in&space;\{1,&space;\dots,&space;num\_samples\}" />
+<img src="https://latex.codecogs.com/gif.latex?x_m&space;\in&space;\mathbb{R}^{num\_dim},&space;m&space;\in&space;\{1,&space;\dots,&space;num\_samples\}" />
 </p>
 
 and returns a multi-dimensional array of shape `(num_samples, degree+1, ..., degree+1)`, where `degree`
