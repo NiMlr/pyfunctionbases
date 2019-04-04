@@ -52,8 +52,8 @@ def recf_legendre_rational(basetensor, ind, x):
     return (2.*n-1.)/n*(xv-1.) / (xv+1.) * Rnmin1 - (n-1.) / n * Rnmin2
 
 
-def recf_tschebyschow_poly(basetensor, ind, x):
-    "Implementation of the recursion formula for Tschebyschow polynomials."
+def recf_chebyshev_poly(basetensor, ind, x):
+    "Implementation of the recursion formula for Chebyshev polynomials."
 
     return 2. * x[:, ind.current_var] * basetensor[ind.all+ind.getPreceding(1)] \
         - basetensor[ind.all+ind.getPreceding(2)]
@@ -65,5 +65,5 @@ recfs = {'standard_poly': (2, 2, 1, init_standard_poly, recf_standard_poly,
                            -1, 1),
          'legendre_rational': (2, 3, 0, init_legendre_rational,
                                recf_legendre_rational, 0, float('Inf')),
-         'tschebyschow_poly': (2, 3, 1, init_standard_poly,
-                               recf_tschebyschow_poly, -1, 1)}
+         'chebyshev_poly': (2, 3, 1, init_standard_poly,
+                            recf_chebyshev_poly, -1, 1)}

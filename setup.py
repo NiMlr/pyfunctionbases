@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(name='pyfunctionbases',
-      version='0.8',
+      version='0.9',
       description='A Python module to compute multidimensional Arrays of evaluated functions.',
       url='https://github.com/NiMlr/PyFunctionBases',
       author='Nils Mueller',

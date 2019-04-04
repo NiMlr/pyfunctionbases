@@ -2,7 +2,7 @@
 ToDo:
   - tests
 '''
-from funcbase import *
+from pyfunctionbases.expansions import *
 import numpy as np
 from numpy.testing import assert_array_almost_equal
 import time
@@ -10,7 +10,7 @@ import time
 DECIMAL = 7
 
 
-def get_tschebyschow_poly(x):
+def get_chebyshev_poly(x):
     p = np.ndarray((x.shape[0], 7))
     p[:, 0] = 1.
     p[:, 1] = x
@@ -76,7 +76,7 @@ def get_handcomputed_function_tensor(x, func, degree):
 funcs = [(get_standard_poly, 6, 'standard_poly'),
          (get_legendre_poly, 6, 'legendre_poly'),
          (get_legendre_ratio, 4, 'legendre_rational'),
-         (get_tschebyschow_poly, 6, 'tschebyschow_poly')]
+         (get_chebyshev_poly, 6, 'chebyshev_poly')]
 
 
 def test_RecursiveExpansionNode1():
@@ -87,7 +87,7 @@ def test_RecursiveExpansionNode1():
         name = functup[2]
         data = np.random.rand(1, 1)
 
-        expn = RecursiveExpansion(degree, recf=name, transform=False)
+        expn = RecursiveExpansion(degree, recf=name)
         nodeexp = expn.execute(data)
         assert_array_almost_equal(nodeexp,
                                   func(data[:, 0]), DECIMAL-3)
@@ -101,8 +101,7 @@ def test_RecursiveExpansionNode2():
         func = functup[0]
         degree = functup[1]
         name = functup[2]
-        recexpn = RecursiveExpansion(degree, recf=name,
-                                     transform=False)
+        recexpn = RecursiveExpansion(degree, recf=name)
         resrec = recexpn.execute(data)
 
         reshand = np.array([get_handcomputed_function_tensor(data[i, :], func, degree)
@@ -115,14 +114,13 @@ def test_RecursiveExpansionNode2():
 def test_Runtime():
     data = np.random.rand(100, 2)
     degree = 120
-    REnode = RecursiveExpansion(degree, recf='legendre_poly',
-                                transform=False)
+    REnode = RecursiveExpansion(degree, recf='legendre_poly')
 
     REstart = time.time()
     REshape = REnode.execute(data).shape
     REtime = time.time()-REstart
 
-    print('N\' took: % f for % d polynomials' %
+    print('Computation took: % f for % d polynomials' %
           (REtime, (degree+1)**data.shape[1]))
     print('Shapes: ', REshape)
 
