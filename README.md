@@ -13,9 +13,9 @@ This is generalized to the multi-dimensional case by using a tensor product
 
 repeatedly on coordinate wise one-dimensional function bases. The code is vectorized over the evalution points
 
-<p align="center">
+
 <img src="https://latex.codecogs.com/gif.latex?x_m&space;\in&space;\mathbb{R}^{num\_dim},&space;m&space;\in&space;\{1,&space;\dots,&space;num\_samples\}" />
-</p>
+
 
 and returns a multi-dimensional array of shape `(num_samples, degree+1, ..., degree+1)`, where `degree`
 is the cardinality of the one-dimensional bases omitting a constant function. Currently, the following functions are available:
