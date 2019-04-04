@@ -1,6 +1,6 @@
 # PyFunctionBases
 A Python module to compute multidimensional arrays of evaluated functions based on Numpy.
-Inline `code` has `back-ticks around` it.
+
 Specifically, the module evaluates basis functions on intervals by employing a recursive formula of type
 <p align="center">
 <img src="https://latex.codecogs.com/gif.latex?f_{n&plus;1}(x)&space;=&space;g(f_n(x),&space;\dots,&space;f_0(x),x)." title="f_{n+1}(x) = g(f_n(x), \dots, f_0(x),x)." />
@@ -10,11 +10,7 @@ This is generalized to the multi-dimensional case by using a tensor product
 <p align="center">
 <img src="https://latex.codecogs.com/gif.latex?(x,y)&space;\mapsto&space;f(x)g(y)" />
 </p>
-repeatedly on coordinate wise one-dimensional function bases. The code vectorized over the
-
-`num_samples`
-
-evalution points
+repeatedly on coordinate wise one-dimensional function bases. The code vectorized over the `num_samples` evalution points
 
 <p align="center">
 <img src="https://latex.codecogs.com/gif.latex?x_i&space;\in&space;\mathbb{R}^{num\_dim},&space;i\in&space;\{1,&space;\dots,&space;num\_samples\}" />
