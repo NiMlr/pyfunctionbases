@@ -40,6 +40,8 @@ pip3 install pyfunctionbases
 
 
 ## Simple Usage
+Now a simple example using standard polynomials is given. By exchanging the name parameter, you can try different functions.
+
 ```python
 from pyfunctionbases import RecursiveExpansion
 import numpy as np
