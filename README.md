@@ -8,7 +8,7 @@ Specifically, the module evaluates basis functions on intervals by employing a r
 
 This is generalized to the multi-dimensional case by using a tensor product
 <p align="center">
-<img src="https://latex.codecogs.com/gif.latex?(x,y)&space;\mapsto&space;f(x)g(y)" />
+<img src="https://latex.codecogs.com/gif.latex?(x,y)&space;\mapsto&space;f_i(x)f_j(y)" title="(x,y) \mapsto f_i(x)f_j(y)" />
 </p>
 
 repeatedly on coordinate wise one-dimensional function bases. The code is vectorized over the evalution points
