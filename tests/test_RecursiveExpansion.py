@@ -1,6 +1,5 @@
 '''
 ToDo:
-  - tests
 '''
 
 import sys
