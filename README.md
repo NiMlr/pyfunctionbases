@@ -11,9 +11,10 @@ This is generalized to the multi-dimensional case by using a tensor product
 <img src="https://latex.codecogs.com/gif.latex?(x,y)&space;\mapsto&space;f(x)g(y)" />
 </p>
 repeatedly on coordinate wise one-dimensional function bases. The code vectorized over the `num_samples` evalution points
+
 <p align="center">
 <img src="https://latex.codecogs.com/gif.latex?x_i&space;\in&space;\mathbb{R}^{num\_dim},&space;i\in&space;\{1,&space;\dots,&space;num\_samples\}" />
- </p>
+</p>
 and returns a multi-dimensional array of shape `(num_samples, degree+1, ..., degree+1)`, where `degree` is the cardinality of the one-dimensional bases. Currently, the following functions are available:
 
 
