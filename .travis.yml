@@ -24,4 +24,4 @@ deploy:
   on:
     tags: true
     python: "3.6"
-    repo: NiMlr/pyfunctionbases
+    repo: NiMlr/PyFunctionBases
