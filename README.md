@@ -20,12 +20,14 @@ repeatedly on coordinate wise one-dimensional function bases. The code is vector
 and returns a multi-dimensional array of shape `(num_samples, degree+1, ..., degree+1)`, where `degree`
 is the cardinality of the one-dimensional bases omitting a constant function. Currently, the following functions are available:
 
+<center>
 | Name | Domain |  
 |-------|-----------|
 | [`standard_poly`](https://en.wikipedia.org/wiki/Polynomial) | `[-Inf, Inf]`|
 | [`legendre_poly`](https://en.wikipedia.org/wiki/Legendre_polynomials) | `[-1, 1]`|
 | [`legendre_rational`](https://en.wikipedia.org/wiki/Legendre_rational_functions) | `[0, Inf]`|
 | [`chebyshev_poly`](https://en.wikipedia.org/wiki/Chebyshev_polynomials#First_kind) | `[-1, 1]`|
+<\center>
 
 [1. Installation](#installation)  
 [2. Simple Usage](#simple-usage)  
