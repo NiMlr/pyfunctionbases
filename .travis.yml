@@ -9,7 +9,7 @@ python:
   - "3.5.3"
   - "3.6"
 
-install: pip install tox-travis coveralls
+install: pip install numpy tox-travis coveralls
 
 script: tox
 
