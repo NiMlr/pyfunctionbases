@@ -11,9 +11,7 @@ This is generalized to the multi-dimensional case by using a tensor product
 <img src="https://latex.codecogs.com/gif.latex?(x,y)&space;\mapsto&space;f(x)g(y)" />
 </p>
 repeatedly on coordinate wise one-dimensional function bases. The code vectorized over the
-
-`num_samples`
-
+`num_samples` 
 evalution points
 
 <p align="center">
