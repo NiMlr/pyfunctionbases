@@ -22,7 +22,7 @@ is the cardinality of the one-dimensional bases omitting a constant function. Cu
 
 | Name | Domain |  
 |-------|-----------|
-| `standard_poly` | `[-Inf, Inf]`|
+| `standard_poly` | `[-Inf, Inf]`| <img src="https://latex.codecogs.com/gif.latex?f_{n&plus;1}(x)&space;=&space;f_n(x)\cdot&space;x" />|
 
 
 [1. Installation](#installation)  
