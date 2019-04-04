@@ -28,6 +28,7 @@ is the cardinality of the one-dimensional bases omitting a constant function. Cu
 | [`legendre_rational`](https://en.wikipedia.org/wiki/Legendre_rational_functions) | `[0, Inf]`|
 | [`chebyshev_poly`](https://en.wikipedia.org/wiki/Chebyshev_polynomials#First_kind) | `[-1, 1]`|
 
+Please make sure that your data lies in these domains, checks will be run if desired.
 
 [1. Installation](#installation)  
 [2. Simple Usage](#simple-usage)  
