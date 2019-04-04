@@ -34,13 +34,13 @@ Please make sure that your data lies in these domains, checks will be run if des
 [2. Simple Usage](#simple-usage)  
 
 
-## 1. Installation 
+## Installation 
 ```bash
 pip3 install pyfunctionbases
 ```
 
 
-## 2. Simple Usage
+## Simple Usage
 Now a simple example using standard polynomials is given. By exchanging the name parameter, you can try different functions.
 
 ```python
