@@ -1,23 +1,17 @@
 sudo: false
-
 language: python
-
 python:
-  - "2.7"
-  - "3.4"
-  - "3.5.2"
-  - "3.5.3"
-  - "3.6"
-
+- '3.4'
+- 3.5.2
+- 3.5.3
+- '3.6'
 install: pip install numpy tox-travis coveralls
-
 script: tox
-
 after_success: coveralls
-
 deploy:
   provider: pypi
   user: NiMlr
-  password: GDQkCRMRSKR8AwTN1CcaYbZGMUwSTec0n4KQGPQxcC8a9Hcf7UCB4hKDYYdK/R90nK/Ok6h7NsSP24ntcJhljINascMtoQEumgNFPbScf+d1IYTuvi0MoVfyJ+cBb74kFqJyKT+MHupg+Q8RNU8tptt3f59+E8duCmP1YeXnUi1g2hzjOEJdmWl8yIFSJ4QytTjE+ApAQw5gJC39R1fjBoBo6xQ9FiW7lGotv1hq6VUKpXUzEr81X+f6wdiKdFGeMl5ygFAe9KdGTkwSD4ArZDMDbxUKmZtb/MpiDhJt8tHfpreClgJlxu/kKo1iwNt+y1aqeFa7k5ZBLFq5Uo69Q1wmWKRI574vmMHA34tWDYp8CbKZnpQEb7yPKQPAtR5qaTDb00EYSlUbI8N+EaygK/AzCNn+C0evU4ck006I2sJYY37GF1m7/YCfflQop22jNTE2KuOnaMHf/kBbbEXsIx8D6bw/3oecVI866b5CL8ZARpyw6onSVA94j0412WgbBFFbHf3e+U6fhwRpOAOGTlUPdLvHBAcWjHGM+zex8Z65YoMmKaq/PxlcbLCfccX7G1jda33McYT/+lEL6DVEUSnhng9D3i79cqzj5RKvfk/odQDlEtXASnaDBfRGnhPHiRuxFDBrvxt/QUE4shgQpfPU9vf3KfLJTTPnE5Od63E=
+  password:
+    secure: ZZlCLVWOFAFly12Dal5gD9UQOZVmLbY7v3nFi6K3jIijovPbmteHcGHFJ6mc1D5IbC0gBKaCqzfxb1Of+/neMk82iGP/utc8tZi7qxInbXUPGQYfIbhmARJ1VraN4kd3iu0BQjZNKvZGTDA5zxCg9bbX7Kor5EnC/xlKHFNjXMX/C/HO5EHDZVWJyKN/fSOE49eNhMHMozmCNS5qPMj27tvfYCbvhij4Azmrt7mQhdR0O+MWY9NxXYx42mOvKCej7wukZfZrHSzTrig+4NmHj27HyJpZ6QY8kN4QSmL0J5MnunAMOAGeDbS7WVeM4NJb3sj+5S9fzIlRMA8z3z7jPW5mbuJtCDBNruboQQeN1P2WlMoVFJoXGgWE6ManSugKjiD3gMd7d5aLjDfO9x3HvPCFth20WIhfdSOlKQvwxO0AcSg/MbCOyFhRUrHy5ZE2o8EWum/syFJkwNagq7GA2bVzDXMtERdUM1s5Kg5vbzzLsSJ7vsDjLy2kZGFgrdQ3G8dmcOmVA+9Am8hun3PcDDCMPDHz1+pUBP7G7VC2jPfYXQWzjs1itS65qVQnl6zWzYm1uTka31ca+4R/DHPLzcWnHKsDBKkRrPnlv/K1HWONBt5urqSs1EiB2/xVj+jG8IfkIqpQRNMMIhdRHG9DjKNbVMSgllz/d0GM/KEz/tM=
   skip_cleanup: true
   distributions: sdist bdist_wheel
