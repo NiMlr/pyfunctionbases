@@ -25,7 +25,8 @@ is the cardinality of the one-dimensional bases omitting a constant function. Cu
 [2. Simple Usage](#simple-usage)  
 
 ## Installation 
-```pip3 install pyfunctionbases
+```bash
+pip3 install pyfunctionbases
 ```
 
 
