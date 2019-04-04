@@ -10,7 +10,7 @@ This is generalized to the multi-dimensional case by using a tensor product
 <p align="center">
 <img src="https://latex.codecogs.com/gif.latex?(x,y)&space;\mapsto&space;f(x)g(y)" />
 </p>
-repeatedly on coordinate wise one-dimensional function bases. The code vectorized over the `num_samples` evalution points
+repeatedly on coordinate wise one-dimensional function bases. The code vectorized over the `code` num_samples evalution points
 
 <p align="center">
 <img src="https://latex.codecogs.com/gif.latex?x_i&space;\in&space;\mathbb{R}^{num\_dim},&space;i\in&space;\{1,&space;\dots,&space;num\_samples\}" />
