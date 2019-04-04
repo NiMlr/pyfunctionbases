@@ -35,6 +35,8 @@ Please make sure that your data lies in these domains, checks will be run if des
 
 
 ## Installation 
+Requirements: `pip3 install numpy`
+
 ```bash
 pip3 install pyfunctionbases
 ```
