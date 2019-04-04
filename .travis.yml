@@ -21,7 +21,3 @@ deploy:
   password: GDQkCRMRSKR8AwTN1CcaYbZGMUwSTec0n4KQGPQxcC8a9Hcf7UCB4hKDYYdK/R90nK/Ok6h7NsSP24ntcJhljINascMtoQEumgNFPbScf+d1IYTuvi0MoVfyJ+cBb74kFqJyKT+MHupg+Q8RNU8tptt3f59+E8duCmP1YeXnUi1g2hzjOEJdmWl8yIFSJ4QytTjE+ApAQw5gJC39R1fjBoBo6xQ9FiW7lGotv1hq6VUKpXUzEr81X+f6wdiKdFGeMl5ygFAe9KdGTkwSD4ArZDMDbxUKmZtb/MpiDhJt8tHfpreClgJlxu/kKo1iwNt+y1aqeFa7k5ZBLFq5Uo69Q1wmWKRI574vmMHA34tWDYp8CbKZnpQEb7yPKQPAtR5qaTDb00EYSlUbI8N+EaygK/AzCNn+C0evU4ck006I2sJYY37GF1m7/YCfflQop22jNTE2KuOnaMHf/kBbbEXsIx8D6bw/3oecVI866b5CL8ZARpyw6onSVA94j0412WgbBFFbHf3e+U6fhwRpOAOGTlUPdLvHBAcWjHGM+zex8Z65YoMmKaq/PxlcbLCfccX7G1jda33McYT/+lEL6DVEUSnhng9D3i79cqzj5RKvfk/odQDlEtXASnaDBfRGnhPHiRuxFDBrvxt/QUE4shgQpfPU9vf3KfLJTTPnE5Od63E=
   skip_cleanup: true
   distributions: sdist bdist_wheel
-  on:
-    tags: true
-    python: "3.6"
-    repo: NiMlr/PyFunctionBases
