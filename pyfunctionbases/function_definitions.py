@@ -1,24 +1,66 @@
 """
 ToDo:
   - add datatype support
-  - maybe change var to dim
-  - first should maybe be named special
-  - make interval transformation look nicer
-  - tests for interval transformation?
-  - better documentation
-  - implement more recursions
 """
-import numpy as np
 
 
 def recf_standard_poly(basetensor, ind, x):
-    "Implementation of the recursion formula for standard polynomials."
+    """Implementation of the recursion formula for standard polynomials.
+
+    Parameters
+    ----------
+    basetensor : numpy.ndarray
+        The ``num_dims+1``-dimensional array considered, with samples
+        along the first dimension. For each sample we have ``num_dims``
+        -dimensional subarrays with non-zero values on the edges.
+    ind : numpy.ndarray
+        Instance of the class ``NDArrayManager`` created in the
+        ``RecursiveExpansion.execute`` method and passed when
+        calling this function.
+    x : numpy.ndarray
+        A two-dimensional numpy array passed to
+        ``RecursiveExpansion.execute``. The recursion will be evaluated
+        on the data contained. Observations of
+        variables are stored in the rows of the array, individual variables
+        are stored in the columns. This means that one row contains one
+        particular observation/measurement of all variables, and one
+        column contains all observations/measurements of one particular
+        variable.
+
+
+    Returns
+    -------
+    numpy.ndarray
+        Array of shape ``(num_samples,)`` containing the evaluation of
+        the most recent recursion step along the ``current_dim``.
+    """
     return basetensor[ind.all+ind.getPreceding(1)] * \
-        basetensor[ind.all+ind.getFirst()]
+        basetensor[ind.all+ind.getSpecial()]
 
 
 def init_standard_poly(basetensor, ind, x):
-    "Initialize the 1 and x1,...,xn before starting the recursion."
+    """Initialize the 1 and x1,...,xn before starting the recursion.
+
+    Parameters
+    ----------
+    basetensor : numpy.ndarray
+        The ``num_dims+1``-dimensional array considered, with samples
+        along the first dimension. For each sample we have ``num_dims``
+        -dimensional subarrays with non-zero values on the edges.
+    ind : numpy.ndarray
+        Instance of the class ``NDArrayManager`` created in the
+        ``RecursiveExpansion.execute`` method and passed when
+        calling this function.
+    x : numpy.ndarray
+        A two-dimensional numpy array passed to
+        ``RecursiveExpansion.execute``. The recursion will be evaluated
+        on the data contained. Observations of
+        variables are stored in the rows of the array, individual variables
+        are stored in the columns. This means that one row contains one
+        particular observation/measurement of all variables, and one
+        column contains all observations/measurements of one particular
+        variable.
+    """
     ind.zeroAllBut(0, 0)
     basetensor[ind.all+ind.getCurrent()] = 1.
     for i in range(x.shape[1]):
@@ -27,15 +69,64 @@ def init_standard_poly(basetensor, ind, x):
 
 
 def recf_legendre_poly(basetensor, ind, x):
-    "Implementation of the recursion formula for Legendre polynomials."
+    """Implementation of the recursion formula for Legendre polynomials.
+
+    Parameters
+    ----------
+    basetensor : numpy.ndarray
+        The ``num_dims+1``-dimensional array considered, with samples
+        along the first dimension. For each sample we have ``num_dims``
+        -dimensional subarrays with non-zero values on the edges.
+    ind : numpy.ndarray
+        Instance of the class ``NDArrayManager`` created in the
+        ``RecursiveExpansion.execute`` method and passed when
+        calling this function.
+    x : numpy.ndarray
+        A two-dimensional numpy array passed to
+        ``RecursiveExpansion.execute``. The recursion will be evaluated
+        on the data contained. Observations of
+        variables are stored in the rows of the array, individual variables
+        are stored in the columns. This means that one row contains one
+        particular observation/measurement of all variables, and one
+        column contains all observations/measurements of one particular
+        variable.
+
+
+    Returns
+    -------
+    numpy.ndarray
+        Array of shape ``(num_samples,)`` containing the evaluation of
+        the most recent recursion step along the ``current_dim``.
+    """
     n = ind.getN()
-    return (2.*n-1.)/n*basetensor[ind.all+ind.getFirst()] \
+    return (2.*n-1.)/n*basetensor[ind.all+ind.getSpecial()] \
         * basetensor[ind.all + ind.getPreceding(1)] \
         - (n-1.)/n*basetensor[ind.all + ind.getPreceding(2)]
 
 
 def init_legendre_rational(basetensor, ind, x):
-    "Initialize the 1 and x1,...,xn before starting the recursion."
+    """Initialize the initial values before starting the recursion.
+
+    Parameters
+    ----------
+    basetensor: numpy.ndarray
+        The ``num_dims+1``- dimensional array considered, with samples
+        along the first dimension. For each sample we have ``num_dims``
+        -dimensional subarrays with non-zero values on the edges.
+    ind: numpy.ndarray
+        Instance of the class ``NDArrayManager`` created in the
+        ``RecursiveExpansion.execute`` method and passed when
+        calling this function.
+    x: numpy.ndarray
+        A two-dimensional numpy array passed to
+        ``RecursiveExpansion.execute``. The recursion will be evaluated
+        on the data contained. Observations of
+        variables are stored in the rows of the array, individual variables
+        are stored in the columns. This means that one row contains one
+        particular observation/measurement of all variables, and one
+        column contains all observations/measurements of one particular
+        variable.
+    """
     ind.zeroAllBut(0, 0)
     basetensor[ind.all+ind.getCurrent()] = 1.
     for i in range(x.shape[1]):
@@ -44,18 +135,73 @@ def init_legendre_rational(basetensor, ind, x):
 
 
 def recf_legendre_rational(basetensor, ind, x):
-    "Implementation of the recursion formula for Legendre polynomials."
+    """Implementation of the recursion formula for Legendre polynomials.
+
+    Parameters
+    ----------
+    basetensor: numpy.ndarray
+        The ``num_dims+1``- dimensional array considered, with samples
+        along the first dimension. For each sample we have ``num_dims``
+        -dimensional subarrays with non-zero values on the edges.
+    ind: numpy.ndarray
+        Instance of the class ``NDArrayManager`` created in the
+        ``RecursiveExpansion.execute`` method and passed when
+        calling this function.
+    x: numpy.ndarray
+        A two-dimensional numpy array passed to
+        ``RecursiveExpansion.execute``. The recursion will be evaluated
+        on the data contained. Observations of
+        variables are stored in the rows of the array, individual variables
+        are stored in the columns. This means that one row contains one
+        particular observation/measurement of all variables, and one
+        column contains all observations/measurements of one particular
+        variable.
+
+    Returns
+    -------
+    numpy.ndarray
+        Array of shape ``(num_samples,)`` containing the evaluation of
+        the most recent recursion step along the ``current_dim``.
+    """
     n = ind.getN()
-    xv = x[:, ind.current_var]
+    xv = x[:, ind.current_dim]
     Rnmin1 = basetensor[ind.all+ind.getPreceding(1)]
     Rnmin2 = basetensor[ind.all+ind.getPreceding(2)]
     return (2.*n-1.)/n*(xv-1.) / (xv+1.) * Rnmin1 - (n-1.) / n * Rnmin2
 
 
 def recf_chebyshev_poly(basetensor, ind, x):
-    "Implementation of the recursion formula for Chebyshev polynomials."
+    """Implementation of the recursion formula for Chebyshev polynomials.
 
-    return 2. * x[:, ind.current_var] * basetensor[ind.all+ind.getPreceding(1)] \
+    Parameters
+    ----------
+    basetensor : numpy.ndarray
+        The ``num_dims+1``-dimensional array considered, with samples
+        along the first dimension. For each sample we have ``num_dims``
+        -dimensional subarrays with non-zero values on the edges.
+    ind : numpy.ndarray
+        Instance of the class ``NDArrayManager`` created in the
+        ``RecursiveExpansion.execute`` method and passed when
+        calling this function.
+    x : numpy.ndarray
+        A two-dimensional numpy array passed to
+        ``RecursiveExpansion.execute``. The recursion will be evaluated
+        on the data contained. Observations of
+        variables are stored in the rows of the array, individual variables
+        are stored in the columns. This means that one row contains one
+        particular observation/measurement of all variables, and one
+        column contains all observations/measurements of one particular
+        variable.
+
+
+    Returns
+    -------
+    numpy.ndarray
+        Array of shape ``(num_samples,)`` containing the evaluation of
+        the most recent recursion step along the ``current_dim``.
+    """
+
+    return 2. * x[:, ind.current_dim] * basetensor[ind.all+ind.getPreceding(1)] \
         - basetensor[ind.all+ind.getPreceding(2)]
 
 
