@@ -1,6 +1,13 @@
 """
-ToDo:
-  - add datatype support
+Function definitions that can be used for the ``RecursiveExpansion`` class.
+
+Within this module you will find the recursive implementations of the
+computation of standard polynomials, Legendre polynomials, 
+Legendre rational functions and Chebyshev polynomials of first kind.
+The advantages of using these functions bases include orthogonality
+and numerical stability. Analytically part of the polynomial bases
+cover the same function space if they are of same degree and on the
+same domain.
 """
 
 
@@ -135,7 +142,7 @@ def init_legendre_rational(basetensor, ind, x):
 
 
 def recf_legendre_rational(basetensor, ind, x):
-    """Implementation of the recursion formula for Legendre polynomials.
+    """Implementation of the recursion formula for Legendre rational functions.
 
     Parameters
     ----------
@@ -213,3 +220,12 @@ recfs = {'standard_poly': (2, 2, 1, init_standard_poly, recf_standard_poly,
                                recf_legendre_rational, 0, float('Inf')),
          'chebyshev_poly': (2, 3, 1, init_standard_poly,
                             recf_chebyshev_poly, -1, 1)}
+"""dict: Bundeling the recursions and relevant information.
+
+Each tuple contains the index of the first recursively defined function,
+the number of preceding elements that are arguments to the recursion
+(+1 for the current), the index of an "special" function that is an argument
+to the recursion (may reduce the total amount arguments needed), the
+initialization, recursion itself and the boundary of the one-dimensional domain
+of the function sequence.
+"""

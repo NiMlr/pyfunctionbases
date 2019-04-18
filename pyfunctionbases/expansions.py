@@ -1,14 +1,11 @@
 """
-Implementation of the general function basis expansion.
+Implementation of the core functionality of the package.
 
 This module the core part of the project, that is, a general class
 ``RecursiveExpansion`` that builds a multidimensional array of basis functions
 for specified data. This is done on a relatively high level using a class
 ``NDArrayManager``, that helps accessing specific parts of multi-dimensional
 Numpy arrays.
-
-ToDo:
-  - add datatype support
 """
 import numpy as np
 from .function_definitions import recfs
@@ -51,10 +48,11 @@ class RecursiveExpansion(object):
         module or the examples in the README.
     """
 
-    def __init__(self, degree, recf='standard_poly', dtype=None):
+    def __init__(self, degree, recf='standard_poly', dtype=np.dtype('float64')):
         """Initialize a RecursiveExpansionNode."""
 
         self.degree = degree
+        self.dtype = dtype
         # if in dictionary
         if recf in recfs:
             # where the recursion starts
@@ -135,7 +133,8 @@ class RecursiveExpansion(object):
         num_dims = x.shape[1]
         num_samples = x.shape[0]
         # preset memory
-        basetensor = np.zeros((num_samples,)+(deg+1,)*num_dims)
+        basetensor = np.empty((num_samples,)+(deg+1,) *
+                              num_dims, dtype=self.dtype)
         # initialize index helper
         ind = NDArrayManager(num_dims, self.reach, special=self.special)
 
@@ -155,7 +154,7 @@ class RecursiveExpansion(object):
 
         # inplace tensorproduct
         np.einsum(ind.einsum_notation, *ind.getElementaries(basetensor),
-                  out=basetensor, optimize='optimal')
+                  out=basetensor, optimize='optimal', dtype=self.dtype)
         return basetensor
 
     def check_domain(self, x, prec=1e-6):
