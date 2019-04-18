@@ -40,6 +40,11 @@ def recf_standard_poly(basetensor, ind, x):
     numpy.ndarray
         Array of shape ``(num_samples,)`` containing the evaluation of
         the most recent recursion step along the ``current_dim``.
+
+    References
+    ----------
+    .. [1] Wikipedia, "Polynomials",
+        https://en.wikipedia.org/wiki/Polynomial
     """
     return basetensor[ind.all+ind.getPreceding(1)] * \
         basetensor[ind.all+ind.getSpecial()]
@@ -104,6 +109,11 @@ def recf_legendre_poly(basetensor, ind, x):
     numpy.ndarray
         Array of shape ``(num_samples,)`` containing the evaluation of
         the most recent recursion step along the ``current_dim``.
+
+    References
+    ----------
+    .. [2] Wikipedia, "Legendre polynomials",
+        https://en.wikipedia.org/wiki/Legendre_polynomials
     """
     n = ind.getN()
     return (2.*n-1.)/n*basetensor[ind.all+ind.getSpecial()] \
@@ -169,6 +179,11 @@ def recf_legendre_rational(basetensor, ind, x):
     numpy.ndarray
         Array of shape ``(num_samples,)`` containing the evaluation of
         the most recent recursion step along the ``current_dim``.
+
+    References
+    ----------
+    .. [3] Wikipedia, "Legendre rational functions",
+        https://en.wikipedia.org/wiki/Legendre_rational_functions
     """
     n = ind.getN()
     xv = x[:, ind.current_dim]
@@ -206,6 +221,11 @@ def recf_chebyshev_poly(basetensor, ind, x):
     numpy.ndarray
         Array of shape ``(num_samples,)`` containing the evaluation of
         the most recent recursion step along the ``current_dim``.
+
+    References
+    ----------
+    .. [4] Wikipedia, "Chebyshev polynomials of first kind",
+        https://en.wikipedia.org/wiki/Chebyshev_polynomials#First_kind
     """
 
     return 2. * x[:, ind.current_dim] * basetensor[ind.all+ind.getPreceding(1)] \

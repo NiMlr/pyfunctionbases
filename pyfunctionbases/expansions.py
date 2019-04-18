@@ -95,7 +95,7 @@ class RecursiveExpansion(object):
         """
         return (self.degree+1)**num_dims
 
-    def execute(self, x, check=True):
+    def execute(self, x, prec=1e-6):
         """Evaluate specified linearily independent (/ orthogonal)
         basis functions with multidimensional domain on data.
 
@@ -117,8 +117,10 @@ class RecursiveExpansion(object):
 
             Mathematically this means
             :math:`x \in \mathbb{R}^{num_samples \times num_dims}`.
-        check : bool
-            Check whether the data is in the domain the functions are defined on.
+        check : float or None
+            Float that indicates a tolerance around the interval boundary
+            on which the functions are defined. Set to None if no checks are
+            needed.
 
         Returns
         -------
@@ -127,8 +129,8 @@ class RecursiveExpansion(object):
             data points ``x`` supplied. Output is of shape
             ``(num_samples, degree+1, ..., degree+1)``.
         """
-        if check:
-            self.check_domain(x)
+        if prec is not None:
+            self.check_domain(x, prec=prec)
         deg = self.degree
         num_dims = x.shape[1]
         num_samples = x.shape[0]

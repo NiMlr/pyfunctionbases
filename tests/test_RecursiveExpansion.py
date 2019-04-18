@@ -101,7 +101,7 @@ def test_RecursiveExpansionNode1():
 
 def test_RecursiveExpansionNode2():
     """Testing the tensor-base."""
-    data = 1e-6+np.random.randn(4, 3)
+    data = 1e-6+np.random.rand(4, 3)
     for functup in funcs:
         func = functup[0]
         degree = functup[1]
