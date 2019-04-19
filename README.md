@@ -19,7 +19,11 @@ repeatedly on coordinate wise one-dimensional function bases. The code is vector
 </p>
 
 and returns a multi-dimensional array of shape `(num_samples, degree+1, ..., degree+1)`, where `degree`
-is the cardinality of the one-dimensional bases omitting a constant function. Currently, the following functions are available:
+is the cardinality of the one-dimensional bases omitting a constant function.
+
+![Multidim_Array](https://user-images.githubusercontent.com/39880630/56447878-45e5f800-630b-11e9-9c41-2930ee45a8ce.png)
+
+Currently, the following functions are available:
 
 
 | Name | Domain |  
