@@ -21,7 +21,9 @@ repeatedly on coordinate wise one-dimensional function bases. The code is vector
 and returns a multi-dimensional array of shape `(num_samples, degree+1, ..., degree+1)`, where `degree`
 is the cardinality of the one-dimensional bases omitting a constant function.
 
-<img align="center" width="399" height="323" src="https://user-images.githubusercontent.com/39880630/56447919-80e82b80-630b-11e9-92bd-6d81b0d78946.png">
+<p align="center">
+<img width="399" height="323" src="https://user-images.githubusercontent.com/39880630/56447919-80e82b80-630b-11e9-92bd-6d81b0d78946.png">
+</p>
 
 Currently, the following functions are available:
 
