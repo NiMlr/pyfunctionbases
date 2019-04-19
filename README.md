@@ -72,6 +72,8 @@ When evaluating functions it is easy to encounter numerical pitfalls. For polyno
 
 In approximation on the other hand, a basis representation like ``[x**n, ..., x**0]`` is useful in search for the right coefficients. This is a case where e.g. Legendre polynomials provide a useful alternative basis, that covers the exact same function space when the same degrees are considered. In the following code snipped, we can observe an example of this.
 
+![approx](https://user-images.githubusercontent.com/39880630/56443826-8d15be00-62f6-11e9-9cc2-43ae51ed8376.gif)
+
 ```python
 from pyfunctionbases import RecursiveExpansion
 import numpy as np
