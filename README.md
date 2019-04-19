@@ -12,10 +12,9 @@ This is generalized to the multi-dimensional case by using a tensor product
 </p>
 
 repeatedly on coordinate wise one-dimensional function bases. The code is vectorized over the evalution points
-
-
+<p align="center">
 <img src="https://latex.codecogs.com/gif.latex?x_m&space;\in&space;\mathbb{R}^{num\_dim},&space;m&space;\in&space;\{1,&space;\dots,&space;num\_samples\}" />
-
+</p>
 
 and returns a multi-dimensional array of shape `(num_samples, degree+1, ..., degree+1)`, where `degree`
 is the cardinality of the one-dimensional bases omitting a constant function. Currently, the following functions are available:
@@ -23,9 +22,9 @@ is the cardinality of the one-dimensional bases omitting a constant function. Cu
 
 | Name | Domain |  
 |-------|-----------|
-| [`standard_poly`](https://en.wikipedia.org/wiki/Polynomial) | `[-Inf, Inf]`|
+| [`standard_poly`](https://en.wikipedia.org/wiki/Polynomial) | `(-Inf, Inf)`|
 | [`legendre_poly`](https://en.wikipedia.org/wiki/Legendre_polynomials) | `[-1, 1]`|
-| [`legendre_rational`](https://en.wikipedia.org/wiki/Legendre_rational_functions) | `[0, Inf]`|
+| [`legendre_rational`](https://en.wikipedia.org/wiki/Legendre_rational_functions) | `[0, Inf)`|
 | [`chebyshev_poly`](https://en.wikipedia.org/wiki/Chebyshev_polynomials#First_kind) | `[-1, 1]`|
 
 Please make sure that your data lies in these domains, checks will be run if desired.
