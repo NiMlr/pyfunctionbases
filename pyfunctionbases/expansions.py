@@ -117,10 +117,10 @@ class RecursiveExpansion(object):
 
             Mathematically this means
             :math:`x \in \mathbb{R}^{num_samples \times num_dims}`.
-        check : float or None
-            Float that indicates a tolerance around the interval boundary
-            on which the functions are defined. Set to None if no checks are
-            needed.
+        prec : float or None
+            (Numerical) tolerance when checking if the data is within the
+            bounds of the domain of the specified functions. No checks will
+            be run when set to None.
 
         Returns
         -------
