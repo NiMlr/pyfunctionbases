@@ -32,7 +32,7 @@ Please make sure that your data lies in these domains, checks will be run if des
 ### Contents
 [1. Installation](#installation)  
 [2. Simple Usage](#simple-usage)  
-
+[3. Where polynomial evaluation can fail](#where-polynomial-evaluation-can-fail)  
 
 ## Installation 
 Requirements: `pip3 install numpy`
@@ -66,3 +66,6 @@ f_ij = expn.execute(x, check=True)
 # flatten the result if needed
 f_k = f_ij.reshape(num_samples,(degree+1)**num_dim)
 ```
+
+## Where polynomial evaluation can fail
+
