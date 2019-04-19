@@ -31,7 +31,7 @@ Please make sure that your data lies in these domains, checks will be run if des
 
 ### Contents
 [1. Installation](#installation)  
-[2. Simple Usage](#simple-usage)  
+[2. Simple usage](#simple-usage)  
 [3. Where polynomial evaluation can fail](#where-polynomial-evaluation-can-fail)  
 
 ## Installation 
@@ -68,4 +68,37 @@ f_k = f_ij.reshape(num_samples,(degree+1)**num_dim)
 ```
 
 ## Where polynomial evaluation can fail
+When evaluating functions it is easy to encounter numerical pitfalls. For polynomials specifically one can take measures to avoid problems with floating point representation, e.g. by employing the representation indicated on the right hand side of the equation `c_1*(x**2)+ c_0*x = x*(c_1*x +c_0)`. Generalizing the former, one can avoid unnecessarily large or small numbers during the evaluating that are caused by large powers.
 
+In approximation on the other hand, a basis representation like ``[x**n, ..., x**0]`` is useful in search for the right coefficients. This is a case where e.g. Legendre polynomials provide a useful alternative basis, that covers the exact same function space when the same degrees are considered. In the following code snipped, we can observe an example of this.
+
+```python
+# create some data
+samples = 1000
+x = np.random.uniform(low=-1.0, high=1.0, size=(samples,))
+x.sort()
+# evaluate a function to approximate on the data
+fvals = np.tanh(x)*np.cos(50*x)
+
+# set some a maximum degree for the polynomials
+degree = 50
+
+# initialize the RecursiveExpansion
+expnleg = RecursiveExpansion(degree, recf='legendre_poly')
+expnstan = RecursiveExpansion(degree, recf='standard_poly')
+
+# compute the basis functions
+basisleg = expnleg.execute(x[:, None], prec=1e-6)
+basisstan = expnstan.execute(x[:, None], prec=1e-6)
+
+# find the coefficients of the least squares fit
+# to the function given the data
+solleg = np.linalg.lstsq(basisleg, fvals, rcond=None)
+solstan = np.linalg.lstsq(basisstan, fvals, rcond=None)
+
+# plot the result
+plt.plot(x, fvals)
+plt.plot(x, np.matmul(basisleg, solleg[0]))
+plt.plot(x, np.matmul(basisstan, solstan[0]))
+plt.show()
+```
