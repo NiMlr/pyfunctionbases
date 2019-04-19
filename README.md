@@ -68,7 +68,7 @@ f_k = f_ij.reshape(num_samples,(degree+1)**num_dim)
 ```
 
 ## Where polynomial evaluation can fail
-When evaluating functions it is easy to encounter numerical pitfalls. For polynomials specifically one can take measures to avoid problems with floating point representation, e.g. by employing the representation indicated on the right hand side of the equation `c_1*(x**2)+ c_0*x = x*(c_1*x +c_0)`. Generalizing the former, one can avoid unnecessarily large or small numbers during the evaluating that are caused by large powers.
+When evaluating functions it is easy to encounter numerical pitfalls. For polynomials specifically one can take measures to avoid problems with floating point numbers, e.g. by employing the representation indicated on the right hand side of the equation `c_1*(x**2)+ c_0*x = x*(c_1*x +c_0)`. Generalizing the former, one can avoid unnecessarily large or small numbers during the evaluation that are caused by large powers and which are badly represented by floating point numbers.
 
 In approximation on the other hand, a basis representation like ``[x**n, ..., x**0]`` is useful in search for the right coefficients. This is a case where e.g. Legendre polynomials provide a useful alternative basis, that covers the exact same function space when the same degrees are considered. In the following code snipped, we can observe an example of this.
 
