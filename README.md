@@ -1,4 +1,3 @@
-<img align="left" src="https://api.travis-ci.org/NiMlr/PyFunctionBases.svg?branch=master">
 
 <img align="right" width="300" height="300" src="https://user-images.githubusercontent.com/39880630/56446422-dc61eb80-6302-11e9-8b46-78c0a9d08420.gif">
 
