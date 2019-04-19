@@ -1,5 +1,6 @@
 <img align="right" width="300" height="300" src="https://user-images.githubusercontent.com/39880630/56446422-dc61eb80-6302-11e9-8b46-78c0a9d08420.gif">
-## PyFunctionBases
+
+# PyFunctionBases
 A Python module to compute multidimensional arrays of evaluated functions based on Numpy.
 
 Specifically, the module evaluates basis functions on intervals by employing a recursive formula of type
