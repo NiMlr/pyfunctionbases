@@ -12,7 +12,7 @@ Specifically, the module evaluates basis functions on intervals by employing a r
 
 This is generalized to the multi-dimensional case by using a tensor product
 <p align="center">
-<img src="https://latex.codecogs.com/gif.latex?(f_i({x_m}_k,f_j({x_m}_l))&space;\mapsto&space;f_i({x_m}_k)f_j({x_m}_l)" />
+<img src="https://latex.codecogs.com/gif.latex?(f_i({x_m}_k),f_j({x_m}_l))&space;\mapsto&space;f_i({x_m}_k)f_j({x_m}_l)" />
 </p>
 
 repeatedly on coordinate wise one-dimensional function bases. The code is vectorized over the evalution points
