@@ -12,7 +12,7 @@ Specifically, the module evaluates basis functions on intervals by employing a r
 
 This is generalized to the multi-dimensional case by using a tensor product
 <p align="center">
-<img src="https://latex.codecogs.com/gif.latex?(x,y)&space;\mapsto&space;f_i(x)f_j(y)" />
+<img src="https://latex.codecogs.com/gif.latex?(x,y)&space;\mapsto&space;f_i(x_k)f_j(x_l)" />
 </p>
 
 repeatedly on coordinate wise one-dimensional function bases. The code is vectorized over the evalution points
@@ -21,7 +21,7 @@ repeatedly on coordinate wise one-dimensional function bases. The code is vector
 </p>
 
 and returns a multi-dimensional array of shape `(num_samples, degree+1, ..., degree+1)`, where `degree`
-is the cardinality of the one-dimensional bases omitting a constant function.
+is the cardinality of the one-dimensional bases omitting a constant function. The following picture shows the two-dimensional case.
 
 <p align="center">
 <img width="399" height="323" src="https://user-images.githubusercontent.com/39880630/56447919-80e82b80-630b-11e9-92bd-6d81b0d78946.png">
@@ -71,7 +71,7 @@ name = 'standard_poly'
 expn = RecursiveExpansion(degree, recf=name)
 
 # evaluate the function, result is of shape (num_samples, degree+1, degree+1)
-f_ij = expn.execute(x, check=True)
+f_ij = expn.execute(x)
 
 # flatten the result if needed
 f_k = f_ij.reshape(num_samples,(degree+1)**num_dim)
